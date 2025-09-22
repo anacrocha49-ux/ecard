@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>e-Card USP</title>
+  <title>e-Card USP</title> 
   <link rel="manifest" href="manifest.json">
+  <!-- Importando Material Icons (Google) -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
     body {
       margin: 0;
@@ -14,10 +16,35 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
+      min-height: 150vh;
       color: black;
     }
+
+    /* Barra superior (AppBar) */
+    .header {
+      width: 100%;
+      background-color: #c77800;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: black;
+      font-size: 20px;
+      font-weight: bold;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .header .title {
+      flex: 1;
+    }
+    .header .icons {
+      display: flex;
+      gap: 12px;
+    }
+    .header .material-icons {
+      font-size: 24px;
+      cursor: pointer;
+    }
+
     .logo {
       margin-top: 20px;
     }
@@ -26,10 +53,10 @@
       height: auto;
     }
     h2 {
-      margin: 5px 0;
+      margin: 2px 0;
     }
     .foto {
-      margin: 20px 0;
+      margin: 15px 0;
     }
     .foto img {
       width: 140px;
@@ -45,11 +72,23 @@
     }
     .expiry {
       font-size: 12px;
-      margin-top: 10px;
+      margin-top: 5px;
+    }
+    p, h2, h3 {
+      margin: 4px 0;
     }
   </style>
 </head>
 <body>
+  <!-- Barra superior -->
+  <div class="header">
+    <div class="title">e-Card</div>
+    <div class="icons">
+      <span class="material-icons">qr_code</span>
+      <span class="material-icons">more_vert</span>
+    </div>
+  </div>
+
   <div class="logo">
     <img src="logo_usp.png" alt="USP Logo">
   </div>
@@ -60,8 +99,8 @@
   </div>
   <p><strong>Ana Caroline Cardoso da Rocha</strong></p>
   <p>16852675</p>
-  <p>Faculdade de Filosofia, Letras e Ciências Humanas</p>
-  <p><strong>GRADUAÇÃO</strong></p>
+  <p><strong>Faculdade de Filosofia, Letras e Ciências Humanas</strong></p>
+  <p>GRADUAÇÃO</p>
   <div class="qrcode">
     <img src="https://uploads.onecompiler.io/43xg7568a/43xg6cw6u/Captura%20de%20tela%202025-09-22%20111559.png" alt="QR Code">
   </div>
