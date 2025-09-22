@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>e-Card USP</title> 
   <link rel="manifest" href="manifest.json">
-  <!-- Importando Material Icons (Google) -->
+  <!-- Importando Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
     body {
@@ -23,8 +23,8 @@
     /* Barra superior (AppBar) */
     .header {
       width: 100%;
-      background-color: #c77800;
-      padding: 10px 16px;
+      background-color: #c5721e;
+      padding: 10px 25px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -52,19 +52,20 @@
       width: 200px;
       height: auto;
     }
-    h2 {
-      margin: 2px 0;
+    h2, h3, p {
+      margin: 4px 0;
     }
     .foto {
       margin: 15px 0;
     }
     .foto img {
       width: 140px;
-      height: 170px;
+      height: 185px;
       border-radius: 2%;
     }
     .qrcode {
       margin-top: 20px;
+      cursor: pointer;
     }
     .qrcode img {
       width: 200px;
@@ -74,8 +75,40 @@
       font-size: 12px;
       margin-top: 5px;
     }
-    p, h2, h3 {
-      margin: 4px 0;
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: absolute;
+      z-index: 1000;
+      top: 50%;       /* ajusta a posição vertical */
+      left: 50%;      /* ajusta a posição horizontal */
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .modal img {
+      width: 45%;          /* ocupa menos da metade da tela */
+      max-width: 300px;    /* limite máximo no desktop */
+    }
+    .modal p {
+      color: white;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -92,7 +125,6 @@
   <div class="logo">
     <img src="logo_usp.png" alt="USP Logo">
   </div>
-  <h2>Universidade de São Paulo</h2>
   <h3>ALUNO</h3>
   <div class="foto">
     <img src="https://uploads.onecompiler.io/43xg7568a/43xg6cw6u/Captura%20de%20tela%202025-09-22%20111417.png" alt="Foto do Aluno">
@@ -101,9 +133,50 @@
   <p>16852675</p>
   <p><strong>Faculdade de Filosofia, Letras e Ciências Humanas</strong></p>
   <p>GRADUAÇÃO</p>
+  
   <div class="qrcode">
-    <img src="https://uploads.onecompiler.io/43xg7568a/43xg6cw6u/Captura%20de%20tela%202025-09-22%20111559.png" alt="QR Code">
+    <img id="qrcodeImg" src="https://uploads.onecompiler.io/43xg7568a/43xg6cw6u/Captura%20de%20tela%202025-09-22%20111559.png" alt="QR Code">
   </div>
-  <p class="expiry">Código QR expira em 03/10/2025 23:59</p>
+  <p class="expiry" id="expiry"></p>
+
+  <!-- Modal -->
+  <div id="qrModal" class="modal">
+    <span class="close" id="closeModal">&times;</span>
+    <img id="qrModalImg" src="" alt="QR Code Ampliado">
+    <p id="expiryModal"></p>
+  </div>
+
+  <script>
+    // Atualizar a data de expiração automaticamente
+    function atualizarData() {
+      const hoje = new Date();
+      const dia = String(hoje.getDate()).padStart(2, '0');
+      const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+      const ano = hoje.getFullYear();
+      const dataTexto = `Código QR expira em ${dia}/${mes}/${ano} 23:59`;
+      document.getElementById("expiry").textContent = dataTexto;
+      document.getElementById("expiryModal").textContent = dataTexto;
+    }
+    atualizarData();
+
+    // Modal do QR Code
+    const modal = document.getElementById("qrModal");
+    const qrImg = document.getElementById("qrcodeImg");
+    const modalImg = document.getElementById("qrModalImg");
+    const closeModal = document.getElementById("closeModal");
+
+    qrImg.onclick = function() {
+      modal.style.display = "flex";
+      modalImg.src = this.src;
+    }
+    closeModal.onclick = function() {
+      modal.style.display = "none";
+    }
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
 </body>
 </html>
