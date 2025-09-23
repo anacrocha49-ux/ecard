@@ -1,6 +1,6 @@
 {
   "name": "e-Card",
-  "short_name": "e=Card",
+  "short_name": "e-Card",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#f0ede4",
